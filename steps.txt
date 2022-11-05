@@ -1,0 +1,6 @@
+---Make Subscription on TestNet and Deploy ----------
+1. Get the SubId for Chainlink VRF
+2. Fund the subscription
+3. Deploy Contract (Raffle) with SubId
+4. Add deployed Raffle Contract(address) as VRF Consumer and with Chainlink Keepers
+5. Run Staging Test 
