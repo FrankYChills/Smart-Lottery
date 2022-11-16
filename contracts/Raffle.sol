@@ -6,6 +6,7 @@ pragma solidity ^0.8.7;
 import "@chainlink/contracts/src/v0.8/VRFConsumerBaseV2.sol";
 import "@chainlink/contracts/src/v0.8/interfaces/VRFCoordinatorV2Interface.sol";
 import "@chainlink/contracts/src/v0.8/interfaces/KeeperCompatibleInterface.sol";
+import "hardhat/console.sol";
 // import "@chainlink/contracts/src/v0.8/AutomationCompatible.sol";
 
 //Custom Errors
@@ -19,7 +20,7 @@ error Raffle__UpkeepNotNeeded(
 );
 
 /**@title A sample Raffle Contract
- * @author Karan Chilwal
+ * @author KC
  * @notice This contract is for creating a sample raffle contract
  * @dev This implements the Chainlink VRF Version 2
  */
@@ -41,7 +42,7 @@ contract Raffle is VRFConsumerBaseV2, KeeperCompatibleInterface {
     uint16 private constant REQUEST_CONFIRMATIONS = 3;
     uint32 private immutable i_callbackGasLimit;
     uint32 private constant NUM_WORDS = 1;
-    string public Country = "India";
+    string public Country = "IndiaUK02";
 
     //Lottery Variables
     address private s_recentWinner;
@@ -101,13 +102,13 @@ contract Raffle is VRFConsumerBaseV2, KeeperCompatibleInterface {
         bytes memory /*checkData*/
     )
         public
-        view
         override
         returns (
             bool upkeepNeeded,
             bytes memory /*performData*/
         )
     {
+        console.log("Upkeep just got called");
         bool isOpen = (RaffleState.OPEN == s_raffleState);
         // curr timestamp - prevtimestamp(or the time passed ) >= interval at which functions needs to be called
         bool timePassed = ((block.timestamp - s_lastTimeStamp) > i_interval);
@@ -123,6 +124,7 @@ contract Raffle is VRFConsumerBaseV2, KeeperCompatibleInterface {
         bytes calldata /*performData*/
     ) external override {
         // performUpkeep should only be called when the timeinterval has passed so we'll check that
+        console.log("perform upKeep got called");
         (bool upkeepNeeded, ) = checkUpkeep("");
         if (!upkeepNeeded) {
             revert Raffle__UpkeepNotNeeded(

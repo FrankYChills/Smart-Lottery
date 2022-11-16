@@ -24,6 +24,8 @@ module.exports = {
       blockConfirmations: 5,
       url: GOERLI_RPC_URL,
       accounts: [PRIVATE_KEY],
+      gas: 2100000,
+      gasPrice: 8000000000,
     },
   },
   solidity: "0.8.7",

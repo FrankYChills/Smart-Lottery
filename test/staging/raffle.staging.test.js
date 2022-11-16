@@ -18,6 +18,8 @@ developmentChains.includes(network.name)
       console.log("Starting Staging Test ");
       beforeEach(async function () {
         deployer = (await getNamedAccounts()).deployer;
+        // deployer will be whoever the deployer was while running the deploy script
+        console.log(`deployer : ${deployer}`);
         // run/deploy all scripts/contracts with tag as 'all'
 
         // await deployments.fixture(["all"]);  // we'll deploy contract via deploy script(before running this script)
@@ -67,6 +69,7 @@ developmentChains.includes(network.name)
             console.log("Ok, time to wait...");
             // after entering raffle the chainlink keeper should do all the things we have been doing in unit tests so that WinnerPicked events gets emitted
             const winnerStartingBalance = await accounts[0].getBalance();
+            console.log(`Account 0 : ${accounts[0].address}`);
           });
         });
       });

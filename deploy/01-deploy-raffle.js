@@ -19,7 +19,7 @@ module.exports = async (hre) => {
   // for localhost/hardhat we'll do subscription programatically but for testnet we'll do via UI
   if (developmentChains.includes(network.name)) {
     // get the deployed mock address
-    console.log("Finding Mock Contract to deploy...");
+    console.log("Finding deployed Mock Contract ...");
     const vrfCoordinatorV2 = await ethers.getContract("VRFContract");
     vrfCoordinatorV2Address = vrfCoordinatorV2.address;
     // create a subscription for the raffle/main contract
